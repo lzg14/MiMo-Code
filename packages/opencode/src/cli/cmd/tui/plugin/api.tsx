@@ -158,6 +158,21 @@ function stateApi(sync: ReturnType<typeof useSync>): TuiPluginApi["state"] {
       task(sessionID) {
         return sync.data.task[sessionID] ?? []
       },
+      subagent(sessionID) {
+        const list = sync.data.actor[sessionID] ?? []
+        return list
+          .filter((a) => a.actor_id !== "main" && (a.status === "pending" || a.status === "running"))
+          .map((a) => ({
+            actor_id: a.actor_id,
+            status: a.status as "pending" | "running",
+            agent: a.agent,
+            description: a.description,
+            turn_count: a.turn_count,
+            last_turn_time: a.last_turn_time,
+            parent_actor_id: a.parent_actor_id,
+            time_created: a.time_created,
+          }))
+      },
       messages(sessionID) {
         return sync.data.message[sessionID]?.["main"] ?? []
       },
