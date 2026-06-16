@@ -77,6 +77,8 @@ A tree-shaped task system (`T1`, `T1.1`, `T1.2`, …) that integrates automatica
 
 The primary agent can create subagents on demand. Subagents share the current session context and can work in parallel, with lifecycle tracking, cancellation, and background execution.
 
+**Sidebar visibility**: Background subagents appear in the sidebar's **Subagents** section in real-time, showing status (pending/running), agent type, description, and turn count. Completed subagents disappear automatically.
+
 ### Goal / Stop Condition
 
 The `/goal` command sets a stopping condition for a session. When the agent tries to stop, an independent judge model evaluates the conversation to decide whether the condition is truly satisfied — preventing premature "optimistic stops" during autonomous work.

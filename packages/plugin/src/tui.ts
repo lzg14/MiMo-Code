@@ -278,6 +278,7 @@ export type TuiState = {
     diff: (sessionID: string) => ReadonlyArray<TuiSidebarFileItem>
     todo: (sessionID: string) => ReadonlyArray<TuiSidebarTodoItem>
     task: (sessionID: string) => ReadonlyArray<TuiSidebarTaskItem>
+    subagent: (sessionID: string) => ReadonlyArray<TuiSidebarSubagent>
     messages: (sessionID: string) => ReadonlyArray<Message>
     status: (sessionID: string) => SessionStatus | undefined
     goal: (sessionID: string) => TuiSidebarGoal | undefined
@@ -336,6 +337,17 @@ export type TuiSidebarTaskItem = Pick<
   SessionTaskResponse[number],
   "id" | "status" | "summary" | "owner" | "ended_at"
 >
+
+export type TuiSidebarSubagent = {
+  id: string
+  status: "pending" | "running"
+  agent: string
+  description: string
+  turnCount: number
+  lastTurnTime: number | null
+  parentActorID: string | null
+  timeCreated: number
+}
 
 export type TuiSidebarFileItem = {
   file: string
